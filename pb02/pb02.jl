@@ -13,4 +13,15 @@ function problem02(limit)
     sum
 end
 
-println(problem02(4e6))
+function problem02_optimized(limit)
+    sum = 0
+    term1 = 2
+    term2 = 8
+    while term1 < limit
+        sum += term1
+        term1, term2 = term2, 4 * term2 + term1
+    end
+    return sum
+end
+
+println(problem02_optimized(4e6))

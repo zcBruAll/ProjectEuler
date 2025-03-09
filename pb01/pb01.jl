@@ -1,5 +1,3 @@
-using BenchmarkTools
-
 function problem01(limit)
     sum = 0
     for i in 1:(limit - 1)
@@ -23,10 +21,4 @@ function problem01_optimized(limit)
     return sum_divizible_by(3) + sum_divizible_by(5) - sum_divizible_by(15)
 end
 
-println(problem01(1_000))
-println(problem01_comprehension(1_000))
 println(problem01_optimized(1_000))
-
-@btime problem01(1_000)
-@btime problem01_comprehension(1_000)
-@btime problem01_optimized(1_000)
