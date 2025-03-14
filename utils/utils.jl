@@ -17,3 +17,30 @@ function primes(max)
 
     return [2; 2 .* findall(sieve) .+ 1]
 end
+
+function sum_of_divisors(value)
+    n = value
+    sum = 1
+    p = 2
+    while p^2 <= n && n > 1
+        if n % p == 0
+            j = p^2
+            n ÷= p
+            while n % p == 0
+                j *= p
+                n ÷= p
+            end
+            sum *= (j - 1)
+            sum ÷= (p - 1)
+        end
+        if p == 2
+            p = 3
+        else
+            p += 2
+        end
+    end
+    if n > 1
+        sum *= (n + 1)
+    end
+    return sum - value
+end
