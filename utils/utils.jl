@@ -1,3 +1,5 @@
+using BenchmarkTools
+
 function primes(max)
     if max < 2
         return Int[]
@@ -16,6 +18,33 @@ function primes(max)
     end
 
     return [2; 2 .* findall(sieve) .+ 1]
+end
+
+function isPrime(n)
+    if n == 1
+        return false
+    elseif n < 4
+        return true
+    elseif n % 2 == 0
+        return false
+    elseif n < 9 
+        return true
+    elseif n % 3 == 0
+        return false
+    else
+        r = floor(sqrt(n))
+        f = 5
+        while f <= r
+            if n % f == 0
+                return false
+            end
+            if  n % (f + 2) == 0
+                return false
+            end
+            f = f + 6
+        end
+        return true
+    end
 end
 
 function sum_of_divisors(value)
@@ -43,4 +72,19 @@ function sum_of_divisors(value)
         sum *= (n + 1)
     end
     return sum - value
+end
+
+function f(n)
+    if n == 0
+        return (0, 1)
+    else
+        a, b = f(n ÷ 2)
+        c = a * (2 * b - a)
+        d = a * a + b * b
+        if n % 2 == 0
+            return (c, d)
+        else
+            return (d, c + d)
+        end
+    end
 end
