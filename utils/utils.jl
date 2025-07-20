@@ -1,5 +1,3 @@
-using BenchmarkTools
-
 function primes(max)
     if max < 2
         return Int[]
@@ -87,4 +85,53 @@ function f(n)
             return (d, c + d)
         end
     end
+end
+
+function isPalindrome(n, base)
+    reversed = 0
+    k = n
+    while k > 0
+        reversed = base * reversed + k % base
+        k ÷= base
+    end
+
+    return (n == reversed)
+end
+
+function makePalindrome(n, base, oddlength)
+    res = n
+    if oddlength
+        n ÷= base
+    end
+
+    while n > 0
+        res = base * res + n % base
+        n ÷= base
+    end
+
+    return res
+end
+
+function makePalindromeBase2(n, oddlength)
+    res = n
+    k = n
+
+    if oddlength
+        k >>= 1
+    end
+
+    while k > 0
+        res = (res << 1) | (k & 1)
+        k >>= 1
+    end
+
+    return res
+end
+
+function digits_to_number(digs)
+    num = 0
+    for d in digs
+        num = 10 * num + d
+    end
+    return num
 end
