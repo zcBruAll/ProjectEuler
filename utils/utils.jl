@@ -135,3 +135,18 @@ function digits_to_number(digs)
     end
     return num
 end
+
+function modpow(base::Int, exp::Int, mod::Int)
+    M = BigInt(mod)
+    result = BigInt(1)
+    b = BigInt(base) % M
+    e = exp
+    while e > 0
+        if e & 1 == 1
+            result = (result * b) % M
+        end
+        b = (b * b) % M
+        e >>= 1
+    end
+    return result
+end
